@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Свежая зелень - доставка прямо с грядки</title>
+    <style>
+        /* Общие стили */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Шапка */
+        header {
+            background-color: #4caf50;
+            padding: 15px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 20px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #e8f5e9;
+        }
+
+        /* Главный баннер */
+        .hero {
+            background: linear-gradient(
+                    rgba(0, 0, 0, 0.5),
+                    rgba(0, 0, 0, 0.5)
+                ),
+                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%234CAF50"/></svg>');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 150px 0 100px;
+            margin-top: 60px;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #ff9800;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        .btn:hover {
+            background: #f57c00;
+        }
+
+        /* О нас */
+        .about {
+            padding: 80px 0;
+            background: #f9f9f9;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            color: #2e7d32;
+        }
+
+        .about-content {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+            padding-right: 30px;
+        }
+
+        .about-image {
+            flex: 1;
+            min-width: 300px;
+            height: 300px;
+            background-color: #c8e6c9;
+            border-radius: 10px;
+            background: url('https://images.unsplash.com/photo-1591723386405-8a15a5a304a1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80')
+                center/cover;
+        }
+
+        /* Каталог */
+        .products {
+            padding: 80px 0;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-image {
+            height: 200px;
+            background-color: #e8f5e9;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .product-info {
+            padding: 20px;
+        }
+
+        .product-title {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        .product-price {
+            color: #4caf50;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+        }
+
+        .add-to-cart {
+            background: #4caf50;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .add-to-cart:hover {
+            background: #2e7d32;
+        }
+
+        /* Как мы работаем */
+        .how-it-works {
+            padding: 80px 0;
+            background: #f9f9f9;
+        }
+
+        .steps {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+
+        .step {
+            text-align: center;
+            max-width: 250px;
+            margin: 20px;
+        }
+
+        .step-icon {
+            width: 80px;
+            height: 80px;
+            background: #4caf50;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.8rem;
+        }
+
+        /* Контакты и доставка */
+        .contacts {
+            padding: 80px 0;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .contact-details,
+        .delivery-info {
+            flex: 1;
+            min-width: 300px;
+            margin-bottom: 30px;
+        }
+
+        /* Подвал */
+        footer {
+            background: #2e7d32;
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+            margin-bottom: 20px;
+        }
+
+        .social-links a {
+            color: white;
+            margin: 0 10px;
+            font-size: 1.5rem;
+            text-decoration: none;
+        }
+
+        /* Корзина */
+        #cart {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            width: 320px;
+            background: white;
+            border: 2px solid #4caf50;
+            padding: 15px;
+            max-height: 450px;
+            overflow-y: auto;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            z-index: 2000;
+            font-size: 14px;
+        }
+
+        #cart h3 {
+            margin-bottom: 10px;
+            color: #4caf50;
+        }
+
+        #cart ul {
+            list-style: none;
+            padding-left: 0;
+            margin-bottom: 10px;
+        }
+
+        #cart ul li {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 6px;
+        }
+
+        #cart-total {
+            font-weight: bold;
+            color: #2e7d32;
+            text-align: right;
+            margin-top: 10px;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            nav ul {
+                margin-top: 15px;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .about-content,
+            .contact-info {
+                flex-direction: column;
+            }
+
+            .about-text {
+                padding-right: 0;
+                margin-bottom: 30px;
+            }
+
+            #cart {
+                width: 90vw;
+                right: 5vw;
+                top: 70px;
+                max-height: 300px;
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Шапка -->
+    <header>
+        <div class="container header-content">
+            <div class="logo">Свежая Зелень</div>
+            <nav>
+                <ul>
+                    <li><a href="#about">О нас</a></li>
+                    <li><a href="#products">Каталог</a></li>
+                    <li><a href="#how-it-works">Как заказать</a></li>
+                    <li><a href="#contacts">Контакты</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <!-- Главный баннер -->
+    <section class="hero">
+        <div class="container">
+            <h1>Свежая зелень прямо с грядки к вашему столу</h1>
+            <p>Ежедневная доставка экологически чистых продуктов</p>
+            <a href="#products" class="btn">Выбрать зелень</a>
+        </div>
+    </section>
+    <!-- О нас -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">О нас</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Мы - фермерское хозяйство, специализирующееся на выращивании экологически чистой зелени без использования пестицидов и химических удобрений.</p>
+                    <p>Наша миссия - обеспечить вас свежей, полезной и ароматной зеленью каждый день. Мы срезаем зелень непосредственно перед доставкой, чтобы сохранить ее свежесть и полезные свойства.</p>
+                    <p>Все наши продукты проходят строгий контроль качества и имеют необходимые сертификаты.</p>
+                </div>
+                <div class="about-image">
+                    <!-- Изображение добавлено через CSS -->
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Каталог -->
+    <section id="products" class="products">
+        <div class="container">
+            <h2 class="section-title">Наша зелень</h2>
+            <div class="product-grid">
+                <!-- Товар 1 -->
+                <div class="product-card">
+                    <div class="product-image" style="background-image: url('https://avatars.mds.yandex.net/get-mpic/4544006/2a000001931fd35b484b4d61f7b9eb0fd725/orig?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                    <div class="product-info">
+                        <h3 class="product-title">Укроп свежий</h3>
+                        <p class="product-price">30 руб. / пучок</p>
+                        <button class="add-to-cart">В корзину</button>
+                    </div>
+                </div>
+
+                <!-- Товар 2 -->
+                <div class="product-card">
+                    <div class="product-image" style="background-image: url('https://main-cdn.sbermegamarket.ru/big2/hlr-system/-20/311/808/721/713/0/600023121017b9.jpg?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                    <div class="product-info">
+                        <h3 class="product-title">Петрушка</h3>
+                        <p class="product-price">30 руб. / пучок</p>
+                        <button class="add-to-cart">В корзину</button>
+                    </div>
+                </div>
+
+                <!-- Товар 3 -->
+                <div class="product-card">
+                    <div class="product-image" style="background-image: url('https://avatars.dzeninfra.ru/get-zen_doc/271828/pub_68244c6dfbd4784f7793cdaf_68244d042ca6893007af4b9e/scale_1200?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                    <div class="product-info">
+                        <h3 class="product-title">Салат Айсберг</h3>
+                        <p class="product-price">30 руб. / 100 гр. </p>
+                        <button class="add-to-cart">В корзину</button>
+                    </div>
+                </div>
+
+                <!-- Товар 4 -->
+                <div class="product-card">
+                    <div class="product-image" style="background-image: url('https://agroshop87.ru/wa-data/public/blog/img/e75166faf62e837cc4b3a444162a8778.jpg?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                    <div class="product-info">
+                        <h3 class="product-title">Базилик </h3>
+                        <p class="product-price">200 руб. / 250 гр. </p>
+                        <button class="add-to-cart">В корзину</button>
+                    </div>
+                </div>
+
+                <!-- Товар 5 -->
+                <div class="product-card">
+                    <div class="product-image" style="background-image: url('https://mnogocvetik.ru/wp-content/uploads/2019/02/%D0%BA%D0%BE%D1%80%D0%B8%D0%B0%D0%BD%D0%B4%D1%80-%D0%BF%D1%83%D1%87%D0%BA%D0%BE%D0%B2%D1%8B%D0%B9.jpg?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                    <div class="product-info">
+                        <h3 class="product-title">Кинза</h3>
+                        <p class="product-price">30 руб. / 50 гр.</p>
+                        <button class="add-to-cart">В корзину</button>
+                    </div>
+                </div>
+
+                <!-- Товар 6 -->
+                <div class="product-card">
+                    <div class="product-image" style="background-image: url('https://santreyd.ru/upload/iblock/001/001f40494c790d3d53dc491613e70031.jpg?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                    <div class="product-info">
+                        <h3 class="product-title">Зеленый лук</h3>
+                        <p class="product-price">30 руб. / 50 гр.</p>
+                        <button class="add-to-cart">В корзину</button>
+                    </div>
+                </div>
+
+                <!-- Товар 7 -->
+                <div class="product-card">
+                    <div class="product-image" style="background-image: url('https://images.gastronom.ru/LR7ZDLDQ171wFqQF14aVJgrYCI8Tg2sZVN2p8pwf6tY/pr:article-content-image/g:ce/rs:auto:0:0:0/L2Ntcy9hbGwtaW1hZ2VzL2I0ZTc3ZjQ2LTExZWYtNGQ0Zi04OWIyLTI4MTVkNGYyNTQ2MC5qcGc.webp?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                    <div class="product-info">
+                        <h3 class="product-title">Щавель</h3>
+                        <p class="product-price">40 руб. / 100 гр.</p>
+                        <button class="add-to-cart">В корзину</button>
+                    </div>
+                </div>
+
+                <!-- Товар 8 -->
+                <div class="product-card">
+                    <div class="product-image" style="background-image: url('https://ir-3.ozone.ru/s3/multimedia-1-t/w1200/6975203789.jpg?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                    <div class="product-info">
+                        <h3 class="product-title">Рукола</h3>
+                        <p class="product-price">50 руб. / 50 гр.</p>
+                        <button class="add-to-cart">В корзину</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Как мы работаем -->
+    <section id="how-it-works" class="how-it-works">
+        <div class="container">
+            <h2 class="section-title">Как мы работаем</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-icon">1</div>
+                    <h3>Выберите продукты</h3>
+                    <p>Добавьте в корзину свежую зелень из нашего каталога</p>
+                </div>
+
+                <div class="step">
+                    <div class="step-icon">2</div>
+                    <h3>Оформите заказ</h3>
+                    <p>Укажите адрес доставки и удобное время</p>
+                </div>
+
+                <div class="step">
+                    <div class="step-icon">3</div>
+                    <h3>Получите заказ</h3>
+                    <p>Мы доставим свежесрезанную зелень прямо к вашей двери</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Контакты и доставка -->
+    <section id="contacts" class="contacts">
+        <div class="container">
+            <h2 class="section-title">Контакты и доставка</h2>
+<div class="contact-info">
+    <div class="contact-details">
+        <h3>Наши контакты</h3>
+        <p>
+            Телефон: +7 (913) 606-11-71
+            <a href="https://t.me/+79136061171" target="_blank" rel="noopener noreferrer" class="social-icon telegram">
+                <i class="fab fa-telegram"></i>
+            </a>
+            <a href="https://wa.me/+79136061171" target="_blank" rel="noopener noreferrer" class="social-icon whatsapp">
+                <i class="fab fa-whatsapp"></i>
+            </a>
+        </p>
+        <p>Телефон: +7 (913) 687-81-49</p>
+        <p>Email: tagneuver@gmail.com</p>
+        <p>Адрес: г. Омск, пр. Комарова, д. 6</p>
+    </div>
+</div>
+
+                <div class="delivery-info">
+                    <h3>Доставка</h3>
+                    <p>Мы доставляем заказы ежедневно с 10:00 до 17:00</p>
+                    <p>Минимальная сумма заказа: 1000 рублей</p>
+                    <p>Стоимость доставки: 500 рублей (бесплатно при заказе от 5000 рублей)</p>
+</div>
+
+		    <div class="Appeal">
+                    <h3>Обращение</h3>
+                    <p>В настоящее время возникают различные проблемы с онлайн-платежами. Пожалуйста, свяжитесь с нами, если вы хотите сделать покупку. Приносим извинения за причиненные неудобства</p>
+                </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Подвал -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Свежая Зелень</h3>
+                    <p>С любовью к природе и вашему здоровью</p>
+                </div>
+
+              <div class="footer-section">
+    <h3>Мы в соцсетях</h3>
+    <div class="social-links">
+        <a href="https://t.me/Omsk_Zelen" target="_blank" rel="noopener noreferrer">
+            <i class="fab fa-telegram"></i> <!-- Это для Font Awesome -->
+            <!-- Или, если хотите использовать SVG иконку: -->
+            <!-- <svg class="telegram-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2L2 12l5 5 5-5-5-5zm5 6l-5 5 5 5 5-5-5-5zm5 5l-5 5 5 5 5-5-5-5z" fill="#ffffff"/>
+            </svg> -->
+            <span>Telegram | @Omsk_Zelen</span>
+        </a>
+    </div>
+</div>
+
+                <div class="footer-section">
+                    <h3>Принимаем к оплате</h3>
+                    <p>Наличные, карты, СБП, онлайн-платежи</p>
+                </div>
+            </div>
+            <p>&copy; 2025 Свежая Зелень. Все права защищены.</p>
+        </div>
+    </footer>
+
+    <!-- Корзина -->
+    <div id="cart" style="display: none;">
+        <h3>Корзина</h3>
+        <ul id="cart-items"></ul>
+        <p id="cart-total"></p>
+    </div>
+
+    <script>
+        const cart = [];
+        const cartElement = document.getElementById('cart');
+        const cartItems = document.getElementById('cart-items');
+        const cartTotal = document.getElementById('cart-total');
+
+        document.querySelectorAll('.add-to-cart').forEach(button => {
+            button.addEventListener('click', function () {
+                const card = this.closest('.product-card');
+                const title = card.querySelector('.product-title').textContent.trim();
+                const priceText = card.querySelector('.product-price').textContent.trim();
+                // Извлечь цену из текста, заменить запятую на точку для parseFloat
+                const price = parseFloat(priceText.replace(/[^\d.,]/g, '').replace(',', '.'));
+
+                let item = cart.find(i => i.title === title);
+                if (item) {
+                    item.quantity++;
+                } else {
+                    cart.push({ title, price, quantity: 1 });
+                }
+
+                renderCart();
+                // Показать корзину, если скрыта
+                cartElement.style.display = "block";
+            });
+        });
+
+        function renderCart() {
+            cartItems.innerHTML = '';
+            let total = 0;
+            cart.forEach(item => {
+                total += item.price * item.quantity;
+                const li = document.createElement('li');
+                li.textContent = `${item.title} — ${item.quantity} шт. — ${(item.price * item.quantity).toFixed(2)} руб.`;
+                cartItems.appendChild(li);
+            });
+            cartTotal.textContent = `Итого: ${total.toFixed(2)} руб.`;
+        }
+    </script>
+</body>
+</html>
